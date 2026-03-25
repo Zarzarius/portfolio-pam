@@ -1,0 +1,223 @@
+.wrap {
+  padding: calc(var(--header-height) + clamp(1.5rem, 4vw, 2.75rem))
+    clamp(1.25rem, 4vw, 3rem) clamp(3rem, 8vw, 5rem);
+  background: var(--bg-page);
+  min-height: min(100svh, 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.visual {
+  position: relative;
+  width: 100%;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.portrait {
+  object-fit: cover;
+  object-position: 58% center;
+}
+
+.nameMark {
+  position: absolute;
+  right: clamp(0.5rem, 2vw, 1.25rem);
+  bottom: clamp(0.35rem, 2vw, 1rem);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(200, 107, 255, 0.35);
+  pointer-events: none;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  padding-top: 0.25rem;
+}
+
+.kickerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kickerLine {
+  width: 2rem;
+  height: 2px;
+  flex-shrink: 0;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #c86bff, rgba(200, 107, 255, 0.2));
+}
+
+.kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.body {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(245, 245, 245, 0.88);
+  max-width: 36rem;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card {
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 0.75rem;
+  background: var(--surface-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.cardSub {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.form {
+  margin-top: clamp(1.35rem, 3vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-bottom-color: rgba(200, 107, 255, 0.65);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+  line-height: 1.55;
+  padding-top: 0.35rem;
+}
+
+.submit {
+  margin-top: 0.5rem;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-gradient);
+  cursor: pointer;
+  background: var(--gradient-hero);
+  box-shadow: 0 0 28px rgba(216, 150, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 36px rgba(216, 150, 255, 0.45);
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    max-width: 28rem;
+    margin: 0 auto;
+  }
+}
