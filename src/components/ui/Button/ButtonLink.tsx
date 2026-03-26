@@ -1,9 +1,12 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Button.module.css";
 
 import type { ButtonVariant } from "./Button";
+
+const cx = bind.bind(styles);
 
 export type ButtonLinkProps = {
   href: string;
@@ -13,12 +16,15 @@ export type ButtonLinkProps = {
   children: ReactNode;
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className" | "children">;
 
-const variantClass: Record<ButtonVariant, string> = {
-  primary: styles.primary,
-  ghost: styles.ghost,
-  outline: styles.outline,
-  subtle: styles.subtle,
-  submit: styles.submit,
+const variantKey: Record<
+  ButtonVariant,
+  "primary" | "ghost" | "outline" | "subtle" | "submit"
+> = {
+  primary: "primary",
+  ghost: "ghost",
+  outline: "outline",
+  subtle: "subtle",
+  submit: "submit",
 };
 
 function isAppRouterInternal(href: string): boolean {
@@ -33,14 +39,7 @@ export function ButtonLink({
   children,
   ...rest
 }: ButtonLinkProps) {
-  const cls = [
-    styles.base,
-    variantClass[variant],
-    fullWidth ? styles.fullWidth : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const cls = cx("base", variantKey[variant], { fullWidth }, className);
 
   if (isAppRouterInternal(href)) {
     return (

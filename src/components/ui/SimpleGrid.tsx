@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
+import bind from "classnames/bind";
 
 import styles from "./SimpleGrid.module.css";
+
+const cx = bind.bind(styles);
 
 export type SimpleGridColumns = 2 | 3 | 4;
 
@@ -8,10 +11,10 @@ type SimpleGridProps = ComponentPropsWithoutRef<"div"> & {
   columns?: SimpleGridColumns;
 };
 
-const colsClass: Record<SimpleGridColumns, string> = {
-  2: styles.cols2,
-  3: styles.cols3,
-  4: styles.cols4,
+const colsKey: Record<SimpleGridColumns, "cols2" | "cols3" | "cols4"> = {
+  2: "cols2",
+  3: "cols3",
+  4: "cols4",
 };
 
 export function SimpleGrid({
@@ -21,9 +24,7 @@ export function SimpleGrid({
 }: SimpleGridProps) {
   return (
     <div
-      className={[styles.root, colsClass[columns], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", colsKey[columns], className)}
       {...props}
     />
   );

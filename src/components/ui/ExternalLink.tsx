@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import bind from "classnames/bind";
 
 import styles from "./ExternalLink.module.css";
+
+const cx = bind.bind(styles);
 
 export type ExternalLinkTone = "default" | "muted";
 
@@ -20,13 +23,7 @@ export function ExternalLink({
 }: ExternalLinkProps) {
   return (
     <a
-      className={[
-        styles.root,
-        tone === "muted" ? styles.muted : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", { muted: tone === "muted" }, className)}
       target="_blank"
       rel="noopener noreferrer"
       {...props}

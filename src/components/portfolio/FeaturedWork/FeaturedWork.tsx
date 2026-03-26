@@ -1,7 +1,9 @@
 import { Container, Section, SectionHeader } from "@/components/ui";
+import bind from "classnames/bind";
 
 import { ProjectCard } from "./ProjectCard";
 import styles from "./FeaturedWork.module.css";
+const cx = bind.bind(styles);
 
 const projects = [
   {
@@ -53,7 +55,7 @@ export function FeaturedWork() {
           description="A selection of recent projects focusing on hyper-realistic character anatomy and complex sci-fi environments."
           align="split"
         />
-        <div className={styles.grid}>
+        <div className={cx("grid")}>
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}

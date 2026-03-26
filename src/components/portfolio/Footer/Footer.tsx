@@ -1,6 +1,8 @@
 import { ExternalLink, LogoMark, StatusDot } from "@/components/ui";
+import bind from "classnames/bind";
 
 import styles from "./Footer.module.css";
+const cx = bind.bind(styles);
 
 const social = [
   { href: "https://www.artstation.com", label: "ArtStation" },
@@ -15,30 +17,30 @@ type FooterProps = {
 export function Footer({ variant = "default" }: FooterProps) {
   if (variant === "contact") {
     return (
-      <footer className={`${styles.footer} ${styles.footerContact}`}>
-        <div className={styles.contactGrid}>
-          <div className={styles.brandBlock}>
+      <footer className={cx("footer", "footerContact")}>
+        <div className={cx("contactGrid")}>
+          <div className={cx("brandBlock")}>
             <LogoMark href="/" size="sm" />
-            <p className={styles.copyInline}>
+            <p className={cx("copyInline")}>
               © 2024 THE IMMERSIVE GALLERY. ALL RIGHTS RESERVED.
             </p>
           </div>
-          <ul className={styles.socialRow} aria-label="Social links">
+          <ul className={cx("socialRow")} aria-label="Social links">
             {social.map((s) => (
               <li key={s.href}>
                 <ExternalLink
                   href={s.href}
                   tone="muted"
-                  className={styles.socialLinkRow}
+                  className={cx("socialLinkRow")}
                 >
                   {s.label.toUpperCase()}
                 </ExternalLink>
               </li>
             ))}
           </ul>
-          <div className={styles.status}>
+          <div className={cx("status")}>
             <StatusDot />
-            <span className={styles.statusText}>STATUS: ONLINE</span>
+            <span className={cx("statusText")}>STATUS: ONLINE</span>
           </div>
         </div>
       </footer>
@@ -46,26 +48,26 @@ export function Footer({ variant = "default" }: FooterProps) {
   }
 
   return (
-    <footer className={styles.footer} id="contact">
-      <div className={styles.grid}>
+    <footer className={cx("footer")} id="contact">
+      <div className={cx("grid")}>
         <div>
           <LogoMark href="/#top" size="sm" />
         </div>
         <div>
-          <p className={styles.colTitle}>CONTACT</p>
-          <a className={styles.email} href="mailto:pam@art.net">
+          <p className={cx("colTitle")}>CONTACT</p>
+          <a className={cx("email")} href="mailto:pam@art.net">
             pam@art.net
           </a>
         </div>
         <div>
-          <p className={styles.colTitle}>SOCIAL</p>
-          <ul className={styles.socialList}>
+          <p className={cx("colTitle")}>SOCIAL</p>
+          <ul className={cx("socialList")}>
             {social.map((s) => (
               <li key={s.href}>
                 <ExternalLink
                   href={s.href}
                   tone="muted"
-                  className={styles.socialLink}
+                  className={cx("socialLink")}
                 >
                   {s.label.toUpperCase()}
                 </ExternalLink>
@@ -73,7 +75,7 @@ export function Footer({ variant = "default" }: FooterProps) {
             ))}
           </ul>
         </div>
-        <p className={styles.copy}>
+        <p className={cx("copy")}>
           © 2024 THE IMMERSIVE GALLERY. ALL RIGHTS RESERVED.
         </p>
       </div>

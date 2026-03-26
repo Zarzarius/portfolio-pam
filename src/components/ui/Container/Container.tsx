@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Container.module.css";
+
+const cx = bind.bind(styles);
 
 export type ContainerSize = "narrow" | "content" | "wide" | "full";
 export type ContainerPadding = "default" | "none";
@@ -10,11 +13,16 @@ type ContainerProps = ComponentPropsWithoutRef<"div"> & {
   padding?: ContainerPadding;
 };
 
-const sizeClass: Record<ContainerSize, string> = {
-  narrow: styles.narrow,
-  content: styles.content,
-  wide: styles.wide,
-  full: styles.full,
+const sizeKey: Record<ContainerSize, "narrow" | "content" | "wide" | "full"> = {
+  narrow: "narrow",
+  content: "content",
+  wide: "wide",
+  full: "full",
+};
+
+const paddingKey: Record<ContainerPadding, "paddingDefault" | "paddingNone"> = {
+  default: "paddingDefault",
+  none: "paddingNone",
 };
 
 export function Container({
@@ -23,13 +31,9 @@ export function Container({
   className,
   ...props
 }: ContainerProps) {
-  const pad =
-    padding === "default" ? styles.paddingDefault : styles.paddingNone;
   return (
     <div
-      className={[styles.root, sizeClass[size], pad, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", sizeKey[size], paddingKey[padding], className)}
       {...props}
     />
   );

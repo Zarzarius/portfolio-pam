@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import bind from "classnames/bind";
 
 import { Body, Container, Heading, Section, Stat } from "@/components/ui";
 
 import styles from "./Precision.module.css";
+const cx = bind.bind(styles);
 
 const modes = [
   {
@@ -43,16 +45,16 @@ export function Precision() {
     <Section
       borderTop
       spacing="default"
-      className={styles.section}
+      className={cx("section")}
       id="about"
       aria-labelledby="precision-heading"
     >
       <Container size="wide" padding="none">
-        <div className={styles.grid}>
-          <div className={styles.visual}>
+        <div className={cx("grid")}>
+          <div className={cx("visual")}>
             <Image
               key={active.id}
-              className={styles.visualImage}
+              className={cx("visualImage")}
               src={active.src}
               alt={active.alt}
               fill
@@ -60,7 +62,7 @@ export function Precision() {
               priority
             />
           </div>
-          <div className={styles.copy}>
+          <div className={cx("copy")}>
             <Heading as="h2" size="sectionLg" id="precision-heading">
               PAM&apos;S PRECISION
             </Heading>
@@ -70,7 +72,7 @@ export function Precision() {
               topology, production-ready UVs, and materials that hold up under
               scrutiny in engine and on the big screen.
             </Body>
-            <div className={styles.stats}>
+            <div className={cx("stats")}>
               {stats.map((s) => (
                 <Stat key={s.label} value={s.value} label={s.label} />
               ))}
@@ -78,16 +80,12 @@ export function Precision() {
           </div>
         </div>
       </Container>
-      <div className={styles.toggleRow} role="group" aria-label="Viewport mode">
+      <div className={cx("toggleRow")} role="group" aria-label="Viewport mode">
         {modes.map((m) => (
           <button
             key={m.id}
             type="button"
-            className={
-              mode === m.id
-                ? `${styles.modeBtn} ${styles.modeBtnActive}`
-                : styles.modeBtn
-            }
+            className={cx("modeBtn", { modeBtnActive: mode === m.id })}
             onClick={() => setMode(m.id)}
             aria-pressed={mode === m.id}
           >

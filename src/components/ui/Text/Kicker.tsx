@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Kicker.module.css";
+
+const cx = bind.bind(styles);
 
 export type KickerTone = "accent" | "muted";
 
@@ -19,17 +22,14 @@ export function Kicker({
   children,
   ...props
 }: KickerProps) {
-  const toneClass = tone === "accent" ? styles.accent : styles.muted;
-  const motion = animate ? styles.animate : "";
+  const toneKey = tone === "accent" ? "accent" : "muted";
 
   if (withRule) {
     return (
-      <div className={[styles.row, className].filter(Boolean).join(" ")}>
+      <div className={cx("row", className)}>
         <span className={styles.rule} aria-hidden />
         <p
-          className={[styles.root, styles.withRuleText, toneClass, motion]
-            .filter(Boolean)
-            .join(" ")}
+          className={cx("root", "withRuleText", toneKey, { animate })}
           {...props}
         >
           {children}
@@ -40,9 +40,7 @@ export function Kicker({
 
   return (
     <p
-      className={[styles.root, toneClass, motion, className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", toneKey, { animate }, className)}
       {...props}
     >
       {children}

@@ -2,8 +2,10 @@
 
 import { ButtonLink, LogoMark, NavLink } from "@/components/ui";
 import { usePathname } from "next/navigation";
+import bind from "classnames/bind";
 
 import styles from "./Header.module.css";
+const cx = bind.bind(styles);
 
 const navItems = [
   { href: "/#gallery", label: "Gallery" },
@@ -15,9 +17,9 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className={styles.header}>
-      <LogoMark className={styles.logoSlot} />
-      <nav className={styles.nav} aria-label="Primary">
+    <header className={cx("header")}>
+      <LogoMark className={cx("logoSlot")} />
+      <nav className={cx("nav")} aria-label="Primary">
         {navItems.map(({ href, label }) => {
           const active = href === "/contact" && pathname === "/contact";
           return (
@@ -33,7 +35,7 @@ export function Header() {
         })}
       </nav>
       <ButtonLink
-        className={styles.hireSlot}
+        className={cx("hireSlot")}
         href="/contact#collaborate"
         variant="subtle"
       >

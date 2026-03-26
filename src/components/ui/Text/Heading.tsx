@@ -1,6 +1,9 @@
 import type { HTMLAttributes } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Heading.module.css";
+
+const cx = bind.bind(styles);
 
 export type HeadingSize =
   | "display"
@@ -20,21 +23,31 @@ type HeadingProps = {
   animate?: boolean;
 } & HTMLAttributes<HTMLHeadingElement>;
 
-const sizeClass: Record<HeadingSize, string> = {
-  display: styles.display,
-  section: styles.section,
-  sectionSm: styles.sectionSm,
-  sectionLg: styles.sectionLg,
-  card: styles.card,
-  overlayTitle: styles.overlayTitle,
-  page: styles.page,
+const sizeKey: Record<
+  HeadingSize,
+  | "display"
+  | "section"
+  | "sectionSm"
+  | "sectionLg"
+  | "card"
+  | "overlayTitle"
+  | "page"
+> = {
+  display: "display",
+  section: "section",
+  sectionSm: "sectionSm",
+  sectionLg: "sectionLg",
+  card: "card",
+  overlayTitle: "overlayTitle",
+  page: "page",
 };
 
-const alignClass: Record<HeadingAlign, string> = {
-  left: styles.alignLeft,
-  center: styles.alignCenter,
-  right: styles.alignRight,
-};
+const alignKey: Record<HeadingAlign, "alignLeft" | "alignCenter" | "alignRight"> =
+  {
+    left: "alignLeft",
+    center: "alignCenter",
+    right: "alignRight",
+  };
 
 export function Heading({
   as: Comp = "h2",
@@ -46,15 +59,13 @@ export function Heading({
 }: HeadingProps) {
   return (
     <Comp
-      className={[
-        styles.root,
-        sizeClass[size],
-        alignClass[align],
-        animate ? styles.fadeUp : "",
+      className={cx(
+        "root",
+        sizeKey[size],
+        alignKey[align],
+        { fadeUp: animate },
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
       {...props}
     />
   );

@@ -1,11 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import bind from "classnames/bind";
 
 import { Stack } from "@/components/ui";
 import { Footer, Header } from "@/components/portfolio";
 
 import styles from "./page.module.css";
+const cx = bind.bind(styles);
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -15,12 +17,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <Stack
       gap="none"
       align="stretch"
-      className={
-        isContact ? `${styles.shell} ${styles.shellContact}` : styles.shell
-      }
+      className={cx("shell", { shellContact: isContact })}
     >
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className={cx("main")}>{children}</main>
       <Footer variant={isContact ? "contact" : "default"} />
     </Stack>
   );

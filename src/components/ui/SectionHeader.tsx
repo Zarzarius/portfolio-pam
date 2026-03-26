@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
+import bind from "classnames/bind";
 
 import styles from "./SectionHeader.module.css";
+
+const cx = bind.bind(styles);
 
 export type SectionHeaderAlign = "split" | "stack";
 
@@ -19,13 +22,8 @@ export function SectionHeader({
   align = "split",
   className,
 }: SectionHeaderProps) {
-  const rootClass =
-    align === "stack"
-      ? `${styles.root} ${styles.stack}`
-      : styles.root;
-
   return (
-    <header className={[rootClass, className].filter(Boolean).join(" ")}>
+    <header className={cx("root", { stack: align === "stack" }, className)}>
       <div className={styles.titleWrap}>
         <h2 className={styles.title} id={titleId}>
           {title}
@@ -34,12 +32,9 @@ export function SectionHeader({
       </div>
       {description ? (
         <p
-          className={[
-            styles.description,
-            align === "split" ? styles.splitDescription : "",
-          ]
-            .filter(Boolean)
-            .join(" ")}
+          className={cx("description", {
+            splitDescription: align === "split",
+          })}
         >
           {description}
         </p>

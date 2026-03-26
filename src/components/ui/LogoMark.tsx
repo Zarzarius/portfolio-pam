@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import type { ComponentPropsWithoutRef } from "react";
+import bind from "classnames/bind";
 
 import styles from "./LogoMark.module.css";
+
+const cx = bind.bind(styles);
 
 export type LogoMarkSize = "default" | "sm";
 
@@ -24,13 +27,7 @@ export function LogoMark({
   return (
     <Link
       href={href}
-      className={[
-        styles.root,
-        size === "sm" ? styles.sm : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", { sm: size === "sm" }, className)}
       {...rest}
     >
       {children}

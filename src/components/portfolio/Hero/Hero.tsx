@@ -8,20 +8,22 @@ import {
   Pill,
   Section,
 } from "@/components/ui";
+import bind from "classnames/bind";
 
 import styles from "./Hero.module.css";
+const cx = bind.bind(styles);
 
 export function Hero() {
   return (
     <Section
       spacing="hero"
-      className={styles.hero}
+      className={cx("hero")}
       id="top"
       aria-labelledby="hero-title"
     >
-      <div className={styles.glow} aria-hidden />
-      <Container size="content" padding="none" className={styles.inner}>
-        <Kicker animate className={styles.heroKicker}>
+      <div className={cx("glow")} aria-hidden />
+      <Container size="content" padding="none" className={cx("inner")}>
+        <Kicker animate className={cx("heroKicker")}>
           PAM&apos;S DIGITAL PORTFOLIO
         </Kicker>
         <Heading
@@ -39,13 +41,13 @@ export function Hero() {
           maxWidth="md"
           center
           animate
-          className={styles.heroDesc}
+          className={cx("heroDesc")}
         >
           I&apos;m Pam, a 3D Artist specializing in character design and
           environment modeling. I transform abstract concepts into immersive
           digital experiences.
         </Body>
-        <div className={styles.actions}>
+        <div className={cx("actions")}>
           <ButtonLink href="#gallery" variant="primary">
             Explore Gallery
           </ButtonLink>
@@ -54,14 +56,14 @@ export function Hero() {
           </ButtonLink>
         </div>
       </Container>
-      <div className={styles.pills} aria-hidden>
+      <div className={cx("pills")} aria-hidden>
         <Pill>
-          <span className={styles.dot} />
+          <span className={cx("dot")} />
           EARTH_ENGINE SYSTEM STATUS
         </Pill>
         <Pill>
           <svg
-            className={styles.lockIcon}
+            className={cx("lockIcon")}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

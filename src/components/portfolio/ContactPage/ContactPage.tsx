@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { type SubmitEventHandler } from "react";
+import bind from "classnames/bind";
 
 import {
   Body,
@@ -18,6 +19,7 @@ import {
 } from "@/components/ui";
 
 import styles from "./ContactPage.module.css";
+const cx = bind.bind(styles);
 
 const tags = ["UNREAL ENGINE 5", "ZBRUSH", "HOUDINI"] as const;
 
@@ -41,12 +43,12 @@ export function ContactPage() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <Container size="wide" padding="none" className={styles.grid}>
-        <div className={styles.visual}>
-          <div className={styles.portraitFrame}>
+    <div className={cx("wrap")}>
+      <Container size="wide" padding="none" className={cx("grid")}>
+        <div className={cx("visual")}>
+          <div className={cx("portraitFrame")}>
             <Image
-              className={styles.portrait}
+              className={cx("portrait")}
               src="/contact-portrait.png"
               alt="Pam working at her desk with 3D modeling software and a drawing tablet"
               fill
@@ -54,12 +56,12 @@ export function ContactPage() {
               priority
             />
           </div>
-          <span className={styles.nameMark} aria-hidden>
+          <span className={cx("nameMark")} aria-hidden>
             PAM
           </span>
         </div>
 
-        <Stack gap="xl" className={styles.copy}>
+        <Stack gap="xl" className={cx("copy")}>
           <Kicker withRule>PAM: DIGITAL ARCHITECT</Kicker>
           <Heading as="h1" size="page">
             Sculpting the Ethereal.
@@ -69,7 +71,7 @@ export function ContactPage() {
             art direction and real-time performance — from high-fidelity sculpts to
             production-ready assets for games and cinematic pipelines.
           </Body>
-          <ul className={styles.tags} aria-label="Tools and platforms">
+          <ul className={cx("tags")} aria-label="Tools and platforms">
             {tags.map((t) => (
               <li key={t}>
                 <Tag>{t}</Tag>
@@ -77,14 +79,14 @@ export function ContactPage() {
             ))}
           </ul>
 
-          <Card id="collaborate" className={styles.collabCard} elevation="flat">
+          <Card id="collaborate" className={cx("collabCard")} elevation="flat">
             <Heading as="h2" size="card">
               Start a Collaboration
             </Heading>
-            <Body size="smaller" tone="muted" className={styles.cardSub}>
+            <Body size="smaller" tone="muted" className={cx("cardSub")}>
               Inquiries for freelance projects or studio partnerships.
             </Body>
-            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            <form className={cx("form")} onSubmit={handleSubmit} noValidate>
               <Stack gap="lg">
                 <Field label="NAME" htmlFor="contact-name">
                   <TextInput

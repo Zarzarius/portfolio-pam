@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Body.module.css";
+
+const cx = bind.bind(styles);
 
 export type BodyTone = "default" | "muted" | "bright";
 export type BodySize = "default" | "small" | "smaller";
@@ -17,28 +20,22 @@ type BodyProps = ComponentPropsWithoutRef<"p"> & {
   animate?: boolean;
 };
 
-const sizeClass: Record<BodySize, string> = {
-  default: styles.default,
-  small: styles.small,
-  smaller: styles.smaller,
+const sizeKey: Record<BodySize, "default" | "small" | "smaller"> = {
+  default: "default",
+  small: "small",
+  smaller: "smaller",
 };
 
-const toneClass: Record<BodyTone, string> = {
-  default: styles.inherit,
-  muted: styles.muted,
-  bright: styles.bright,
+const toneKey: Record<BodyTone, "inherit" | "muted" | "bright"> = {
+  default: "inherit",
+  muted: "muted",
+  bright: "bright",
 };
 
-const maxClass: Record<BodyMaxWidth, string> = {
-  none: "",
-  sm: styles.maxSm,
-  md: styles.maxMd,
-};
-
-const alignClass: Record<BodyAlign, string> = {
-  left: styles.textLeft,
-  center: styles.textCenter,
-  right: styles.textRight,
+const alignKey: Record<BodyAlign, "textLeft" | "textCenter" | "textRight"> = {
+  left: "textLeft",
+  center: "textCenter",
+  right: "textRight",
 };
 
 export function Body({
@@ -54,18 +51,16 @@ export function Body({
 }: BodyProps) {
   return (
     <Comp
-      className={[
-        styles.root,
-        sizeClass[size],
-        toneClass[tone],
-        maxClass[maxWidth],
-        alignClass[align],
-        center ? styles.center : "",
-        animate ? styles.fadeUp : "",
+      className={cx(
+        "root",
+        sizeKey[size],
+        toneKey[tone],
+        maxWidth === "sm" && "maxSm",
+        maxWidth === "md" && "maxMd",
+        alignKey[align],
+        { center, fadeUp: animate },
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
       {...props}
     />
   );

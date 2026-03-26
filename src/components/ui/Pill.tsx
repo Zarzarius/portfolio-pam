@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Pill.module.css";
+
+const cx = bind.bind(styles);
 
 export type PillVariant = "default" | "status";
 
@@ -18,13 +21,7 @@ export function Pill({
 }: PillProps) {
   return (
     <span
-      className={[
-        styles.root,
-        variant === "status" ? styles.status : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("root", { status: variant === "status" }, className)}
       {...props}
     >
       {leading}
@@ -36,7 +33,7 @@ export function Pill({
 export function StatusDot({ className }: { className?: string }) {
   return (
     <span
-      className={[styles.dot, className].filter(Boolean).join(" ")}
+      className={cx("dot", className)}
       aria-hidden
     />
   );

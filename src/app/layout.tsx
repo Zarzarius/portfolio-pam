@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
+import classNames from "classnames";
+import { ViewTransitions } from "next-view-transitions";
 import { AppShell } from "./AppShell";
 import "./globals.css";
 
@@ -27,9 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${manrope.variable}`}>
+    <html lang="en" className={classNames(syne.variable, manrope.variable)}>
       <body>
-        <AppShell>{children}</AppShell>
+        <ViewTransitions>
+          <AppShell>{children}</AppShell>
+        </ViewTransitions>
       </body>
     </html>
   );

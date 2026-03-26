@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
+import bind from "classnames/bind";
 
 import styles from "./Button.module.css";
+
+const cx = bind.bind(styles);
 
 export type ButtonVariant = "primary" | "ghost" | "outline" | "subtle" | "submit";
 
@@ -9,12 +12,15 @@ type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   fullWidth?: boolean;
 };
 
-const variantClass: Record<ButtonVariant, string> = {
-  primary: styles.primary,
-  ghost: styles.ghost,
-  outline: styles.outline,
-  subtle: styles.subtle,
-  submit: styles.submit,
+const variantKey: Record<
+  ButtonVariant,
+  "primary" | "ghost" | "outline" | "subtle" | "submit"
+> = {
+  primary: "primary",
+  ghost: "ghost",
+  outline: "outline",
+  subtle: "subtle",
+  submit: "submit",
 };
 
 export function Button({
@@ -27,14 +33,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={[
-        styles.base,
-        variantClass[variant],
-        fullWidth ? styles.fullWidth : "",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx("base", variantKey[variant], { fullWidth }, className)}
       {...props}
     />
   );
