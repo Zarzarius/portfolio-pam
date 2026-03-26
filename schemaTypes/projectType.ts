@@ -1,5 +1,17 @@
 import {defineField, defineType} from 'sanity'
 
+const projectAreas = [
+  {title: 'Neon', value: 'neon'},
+  {title: 'Ether', value: 'ether'},
+  {title: 'Clock', value: 'clock'},
+  {title: 'Obsid', value: 'obsid'},
+] as const
+
+type ProjectArea = (typeof projectAreas)[number]['value']
+
+const isProjectArea = (value: unknown): value is ProjectArea =>
+  typeof value === 'string' && projectAreas.some((area) => area.value === value)
+
 export const projectType = defineType({
   name: 'project',
   title: 'Project',
@@ -22,15 +34,12 @@ export const projectType = defineType({
       name: 'area',
       title: 'Area',
       type: 'string',
-      options: {
-        list: [
-          {title: 'Neon', value: 'neon'},
-          {title: 'Ether', value: 'ether'},
-          {title: 'Clock', value: 'clock'},
-          {title: 'Obsid', value: 'obsid'},
-        ],
-      },
-      validation: (rule) => rule.required(),
+      options: {list: projectAreas},
+      validation: (rule) =>
+        rule.required().custom((value) => {
+          if (value === undefined) return 'Area is required'
+          return isProjectArea(value) ? true : 'Area must be one of the predefined values'
+        }),
     }),
     defineField({name: 'cardTitle', title: 'Card Title', type: 'string', validation: (rule) => rule.required()}),
     defineField({name: 'cardSubtitle', title: 'Card Subtitle', type: 'string'}),
