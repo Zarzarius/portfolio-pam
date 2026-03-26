@@ -1,13 +1,13 @@
 import {defineField, defineType} from 'sanity'
 
-const projectAreas = [
+type ProjectArea = 'neon' | 'ether' | 'clock' | 'obsid'
+
+const projectAreas: {title: string; value: ProjectArea}[] = [
   {title: 'Neon', value: 'neon'},
   {title: 'Ether', value: 'ether'},
   {title: 'Clock', value: 'clock'},
   {title: 'Obsid', value: 'obsid'},
-] as const
-
-type ProjectArea = (typeof projectAreas)[number]['value']
+]
 
 const isProjectArea = (value: unknown): value is ProjectArea =>
   typeof value === 'string' && projectAreas.some((area) => area.value === value)
