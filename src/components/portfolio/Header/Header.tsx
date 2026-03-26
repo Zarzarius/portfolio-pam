@@ -9,13 +9,17 @@ import bind from "classnames/bind";
 import styles from "./Header.module.css";
 const cx = bind.bind(styles);
 
-const navItems = [
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#about", label: "About" },
-  { href: "/contact", label: "Contact" },
-] as const;
+type HeaderNavItem = {
+  href: string;
+  label: string;
+};
 
-export function Header() {
+type HeaderProps = {
+  navItems: HeaderNavItem[];
+  hireMeLabel: string;
+};
+
+export function Header({ navItems, hireMeLabel }: HeaderProps) {
   const pathname = usePathname();
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const menuOpen = menuPath === pathname;
@@ -57,7 +61,7 @@ export function Header() {
         href="/contact#collaborate"
         variant="subtle"
       >
-        HIRE ME
+        {hireMeLabel}
       </ButtonLink>
       <div
         id="mobile-spotlight-nav"
@@ -86,7 +90,7 @@ export function Header() {
             className={cx("mobileHire")}
             onClick={() => setMenuPath(null)}
           >
-            HIRE ME
+            {hireMeLabel}
           </ButtonLink>
         </nav>
       </div>

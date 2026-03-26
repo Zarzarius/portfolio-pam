@@ -4,17 +4,26 @@ import bind from "classnames/bind";
 import styles from "./Footer.module.css";
 const cx = bind.bind(styles);
 
-const social = [
-  { href: "https://www.artstation.com", label: "ArtStation" },
-  { href: "https://www.linkedin.com", label: "LinkedIn" },
-  { href: "https://www.instagram.com", label: "Instagram" },
-] as const;
+type SocialLink = {
+  href: string;
+  label: string;
+};
 
 type FooterProps = {
   variant?: "default" | "contact";
+  social: SocialLink[];
+  email: string;
+  copyright: string;
+  statusText: string;
 };
 
-export function Footer({ variant = "default" }: FooterProps) {
+export function Footer({
+  variant = "default",
+  social,
+  email,
+  copyright,
+  statusText,
+}: FooterProps) {
   if (variant === "contact") {
     return (
       <footer className={cx("footer", "footerContact")}>
@@ -22,7 +31,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           <div className={cx("brandBlock")}>
             <LogoMark href="/" size="sm" />
             <p className={cx("copyInline")}>
-              © 2024 THE IMMERSIVE GALLERY. ALL RIGHTS RESERVED.
+              {copyright}
             </p>
           </div>
           <ul className={cx("socialRow")} aria-label="Social links">
@@ -40,7 +49,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           </ul>
           <div className={cx("status")}>
             <StatusDot />
-            <span className={cx("statusText")}>STATUS: ONLINE</span>
+            <span className={cx("statusText")}>{statusText}</span>
           </div>
         </div>
       </footer>
@@ -55,8 +64,8 @@ export function Footer({ variant = "default" }: FooterProps) {
         </div>
         <div>
           <p className={cx("colTitle")}>CONTACT</p>
-          <a className={cx("email")} href="mailto:pam@art.net">
-            pam@art.net
+          <a className={cx("email")} href={`mailto:${email}`}>
+            {email}
           </a>
         </div>
         <div>
@@ -76,7 +85,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           </ul>
         </div>
         <p className={cx("copy")}>
-          © 2024 THE IMMERSIVE GALLERY. ALL RIGHTS RESERVED.
+          {copyright}
         </p>
       </div>
     </footer>

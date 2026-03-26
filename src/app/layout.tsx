@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 import classNames from "classnames";
 import { ViewTransitions } from "next-view-transitions";
+import { getSiteSettingsContent } from "@/lib/sanity/content";
 import { AppShell } from "./AppShell";
 import "./globals.css";
 
@@ -17,22 +18,35 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "PAM. — 3D Artist & Virtual Worlds",
-  description:
-    "Pam — 3D artist specializing in character design and environment modeling. Immersive digital experiences.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteSettings = await getSiteSettingsContent();
+  return {
+    title: siteSettings.siteTitle,
+    description: siteSettings.defaultDescription,
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteSettings = await getSiteSettingsContent();
+
   return (
     <html lang="en" className={classNames(syne.variable, manrope.variable)}>
       <body>
         <ViewTransitions>
-          <AppShell>{children}</AppShell>
+          <AppShell
+            navItems={siteSettings.headerNav}
+            hireMeLabel={siteSettings.hireMeLabel}
+            footerEmail={siteSettings.footerEmail}
+            footerCopyright={siteSettings.footerCopyright}
+            footerStatusText={siteSettings.footerStatusText}
+            socialLinks={siteSettings.socialLinks}
+          >
+            {children}
+          </AppShell>
         </ViewTransitions>
       </body>
     </html>

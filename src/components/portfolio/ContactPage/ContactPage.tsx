@@ -21,9 +21,39 @@ import {
 import styles from "./ContactPage.module.css";
 const cx = bind.bind(styles);
 
-const tags = ["UNREAL ENGINE 5", "ZBRUSH", "HOUDINI"] as const;
+type ContactPageProps = {
+  kicker: string;
+  heading: string;
+  description: string;
+  portraitSrc: string;
+  portraitAlt: string;
+  nameMark: string;
+  tags: string[];
+  cardTitle: string;
+  cardSubtitle: string;
+  formNameLabel: string;
+  formEmailLabel: string;
+  formDetailsLabel: string;
+  formSubmitLabel: string;
+  formEmailTo: string;
+};
 
-export function ContactPage() {
+export function ContactPage({
+  kicker,
+  heading,
+  description,
+  portraitSrc,
+  portraitAlt,
+  nameMark,
+  tags,
+  cardTitle,
+  cardSubtitle,
+  formNameLabel,
+  formEmailLabel,
+  formDetailsLabel,
+  formSubmitLabel,
+  formEmailTo,
+}: ContactPageProps) {
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -39,7 +69,7 @@ export function ContactPage() {
         "\n",
       ),
     );
-    window.location.href = `mailto:pam@art.net?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${formEmailTo}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -49,27 +79,25 @@ export function ContactPage() {
           <div className={cx("portraitFrame")}>
             <Image
               className={cx("portrait")}
-              src="/contact-portrait.png"
-              alt="Pam working at her desk with 3D modeling software and a drawing tablet"
+              src={portraitSrc}
+              alt={portraitAlt}
               fill
               sizes="(max-width: 960px) 100vw, 48vw"
               priority
             />
           </div>
           <span className={cx("nameMark")} aria-hidden>
-            PAM
+            {nameMark}
           </span>
         </div>
 
         <Stack gap="xl" className={cx("copy")}>
-          <Kicker withRule>PAM: DIGITAL ARCHITECT</Kicker>
+          <Kicker withRule>{kicker}</Kicker>
           <Heading as="h1" size="page">
-            Sculpting the Ethereal.
+            {heading}
           </Heading>
           <Body tone="bright" size="default" maxWidth="md">
-            I craft immersive environments and characters at the intersection of
-            art direction and real-time performance — from high-fidelity sculpts to
-            production-ready assets for games and cinematic pipelines.
+            {description}
           </Body>
           <ul className={cx("tags")} aria-label="Tools and platforms">
             {tags.map((t) => (
@@ -81,14 +109,14 @@ export function ContactPage() {
 
           <Card id="collaborate" className={cx("collabCard")} elevation="flat">
             <Heading as="h2" size="card">
-              Start a Collaboration
+              {cardTitle}
             </Heading>
             <Body size="smaller" tone="muted" className={cx("cardSub")}>
-              Inquiries for freelance projects or studio partnerships.
+              {cardSubtitle}
             </Body>
             <form className={cx("form")} onSubmit={handleSubmit} noValidate>
               <Stack gap="lg">
-                <Field label="NAME" htmlFor="contact-name">
+                <Field label={formNameLabel} htmlFor="contact-name">
                   <TextInput
                     id="contact-name"
                     name="name"
@@ -97,7 +125,7 @@ export function ContactPage() {
                     required
                   />
                 </Field>
-                <Field label="EMAIL" htmlFor="contact-email">
+                <Field label={formEmailLabel} htmlFor="contact-email">
                   <TextInput
                     id="contact-email"
                     name="email"
@@ -106,7 +134,7 @@ export function ContactPage() {
                     required
                   />
                 </Field>
-                <Field label="PROJECT DETAILS" htmlFor="contact-details">
+                <Field label={formDetailsLabel} htmlFor="contact-details">
                   <TextArea
                     id="contact-details"
                     name="details"
@@ -115,7 +143,7 @@ export function ContactPage() {
                   />
                 </Field>
                 <Button variant="submit" type="submit" fullWidth>
-                  TRANSMIT MESSAGE
+                  {formSubmitLabel}
                 </Button>
               </Stack>
             </form>

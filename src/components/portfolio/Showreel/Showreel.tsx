@@ -11,7 +11,15 @@ import bind from "classnames/bind";
 import styles from "./Showreel.module.css";
 const cx = bind.bind(styles);
 
-export function Showreel() {
+type ShowreelProps = {
+  kicker: string;
+  title: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+export function Showreel({ kicker, title, body, ctaLabel, ctaHref }: ShowreelProps) {
   return (
     <Section
       spacing="compact"
@@ -20,21 +28,19 @@ export function Showreel() {
       aria-labelledby="showreel-heading"
     >
       <Container size="narrow" padding="none">
-        <Kicker className={cx("kicker")}>SHOWREEL</Kicker>
+        <Kicker className={cx("kicker")}>{kicker}</Kicker>
         <Heading as="h2" size="sectionSm" align="center" id="showreel-heading">
-          Motion & breakdown
+          {title}
         </Heading>
         <Body tone="muted" align="center" className={cx("text")}>
-          A director&apos;s cut of recent cinematics, turntables, and look-dev
-          passes. Replace this block with an embedded reel when your cut is
-          ready.
+          {body}
         </Body>
         <ButtonLink
-          href="mailto:pam@art.net?subject=Showreel%20request"
+          href={ctaHref}
           variant="outline"
           className={cx("link")}
         >
-          REQUEST LINK
+          {ctaLabel}
         </ButtonLink>
       </Container>
     </Section>

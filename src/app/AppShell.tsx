@@ -9,7 +9,25 @@ import { Footer, Header } from "@/components/portfolio";
 import styles from "./page.module.css";
 const cx = bind.bind(styles);
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+type AppShellProps = {
+  children: React.ReactNode;
+  navItems: Array<{ label: string; href: string }>;
+  hireMeLabel: string;
+  footerEmail: string;
+  footerCopyright: string;
+  footerStatusText: string;
+  socialLinks: Array<{ label: string; href: string }>;
+};
+
+export function AppShell({
+  children,
+  navItems,
+  hireMeLabel,
+  footerEmail,
+  footerCopyright,
+  footerStatusText,
+  socialLinks,
+}: AppShellProps) {
   const pathname = usePathname();
   const isContact = pathname === "/contact";
   const isStudio = pathname.startsWith("/studio");
@@ -24,9 +42,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       align="stretch"
       className={cx("shell", { shellContact: isContact })}
     >
-      <Header />
+      <Header navItems={navItems} hireMeLabel={hireMeLabel} />
       <main className={cx("main")}>{children}</main>
-      <Footer variant={isContact ? "contact" : "default"} />
+      <Footer
+        variant={isContact ? "contact" : "default"}
+        social={socialLinks}
+        email={footerEmail}
+        copyright={footerCopyright}
+        statusText={footerStatusText}
+      />
     </Stack>
   );
 }

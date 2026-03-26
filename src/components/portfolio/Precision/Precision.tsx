@@ -9,37 +9,31 @@ import { Body, Container, Heading, Section, Stat } from "@/components/ui";
 import styles from "./Precision.module.css";
 const cx = bind.bind(styles);
 
-const modes = [
-  {
-    id: "wireframe" as const,
-    label: "WIREFRAME",
-    src: "/wireframe.png",
-    alt: "Wireframe view of a sci-fi environment interior",
-  },
-  {
-    id: "lighting" as const,
-    label: "LIGHTING",
-    src: "/lighting.png",
-    alt: "Lighting pass of the sci-fi environment in engine",
-  },
-  {
-    id: "final" as const,
-    label: "FINAL",
-    src: "/final.png",
-    alt: "Final rendered sci-fi environment scene",
-  },
-];
+type PrecisionMode = {
+  id: string;
+  label: string;
+  src: string;
+  alt: string;
+};
 
-const stats = [
-  { value: "200+", label: "CUSTOM ASSETS" },
-  { value: "12K", label: "MAX POLYCOUNT" },
-  { value: "8K", label: "TEXTURE RESOLUTION" },
-  { value: "0.1ms", label: "RENDER LATENCY" },
-] as const;
+type PrecisionStat = {
+  value: string;
+  label: string;
+};
 
-export function Precision() {
-  const [mode, setMode] = useState<(typeof modes)[number]["id"]>("wireframe");
+type PrecisionProps = {
+  title: string;
+  description: string;
+  modes: PrecisionMode[];
+  stats: PrecisionStat[];
+};
+
+export function Precision({ title, description, modes, stats }: PrecisionProps) {
+  const [mode, setMode] = useState<(typeof modes)[number]["id"]>(modes[0]?.id ?? "default");
   const active = modes.find((m) => m.id === mode) ?? modes[0];
+  if (!active) {
+    return null;
+  }
 
   return (
     <Section
@@ -64,13 +58,10 @@ export function Precision() {
           </div>
           <div className={cx("copy")}>
             <Heading as="h2" size="sectionLg" id="precision-heading">
-              PAM&apos;S PRECISION
+              {title}
             </Heading>
             <Body tone="muted" maxWidth="md" size="default">
-              My work is built on a foundation of technical excellence. I bridge
-              the gap between creative vision and real-time performance — clean
-              topology, production-ready UVs, and materials that hold up under
-              scrutiny in engine and on the big screen.
+              {description}
             </Body>
             <div className={cx("stats")}>
               {stats.map((s) => (

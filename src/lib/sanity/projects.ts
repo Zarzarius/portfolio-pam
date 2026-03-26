@@ -1,28 +1,5 @@
-import {createClient} from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
 import type { ProjectData } from "@/components/portfolio/projectsData";
-
-const projectId = "8km354zm";
-const dataset = "production";
-const apiVersion = "2026-03-26";
-
-const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: true,
-  perspective: "published",
-});
-
-const builder = imageUrlBuilder(client);
-
-type SanityImageRef = {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-  };
-};
+import {asImageUrl, sanityClient, type SanityImageRef} from "./client";
 
 type SanityProject = {
   slug?: { current?: string };
@@ -74,13 +51,6 @@ const projectsQuery = `*[_type == "project"] | order(order asc, _createdAt desc)
   heroImageAlt,
   gallery
 }`;
-
-function asImageUrl(image?: SanityImageRef, width = 1600): string | null {
-  if (!image?.asset?._ref) {
-    return null;
-  }
-  return builder.image(image).width(width).auto("format").url();
-}
 
 function toProjectData(project: SanityProject): ProjectData | null {
   const id = project.slug?.current?.trim();
@@ -160,7 +130,7 @@ function toProjectData(project: SanityProject): ProjectData | null {
 }
 
 export async function getSanityProjects(): Promise<ProjectData[]> {
-  const projects = await client.fetch<SanityProject[]>(projectsQuery);
+  const projects = await sanityClient.fetch<SanityProject[]>(projectsQuery);
   return projects.map(toProjectData).filter((project): project is ProjectData => project !== null);
 }
 

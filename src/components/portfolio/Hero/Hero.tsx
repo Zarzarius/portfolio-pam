@@ -13,7 +13,27 @@ import bind from "classnames/bind";
 import styles from "./Hero.module.css";
 const cx = bind.bind(styles);
 
-export function Hero() {
+type HeroProps = {
+  kicker: string;
+  title: string;
+  highlight: string;
+  description: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  leftPillText: string;
+  rightPillText: string;
+};
+
+export function Hero({
+  kicker,
+  title,
+  highlight,
+  description,
+  primaryCta,
+  secondaryCta,
+  leftPillText,
+  rightPillText,
+}: HeroProps) {
   return (
     <Section
       spacing="hero"
@@ -24,7 +44,7 @@ export function Hero() {
       <div className={cx("glow")} aria-hidden />
       <Container size="content" padding="none" className={cx("inner")}>
         <Kicker animate className={cx("heroKicker")}>
-          PAM&apos;S DIGITAL PORTFOLIO
+          {kicker}
         </Kicker>
         <Heading
           as="h1"
@@ -33,7 +53,7 @@ export function Hero() {
           animate
           id="hero-title"
         >
-          PAM CREATES <GradientText>VIRTUAL</GradientText>
+          {title} <GradientText>{highlight}</GradientText>
         </Heading>
         <Body
           tone="muted"
@@ -43,23 +63,21 @@ export function Hero() {
           animate
           className={cx("heroDesc")}
         >
-          I&apos;m Pam, a 3D Artist specializing in character design and
-          environment modeling. I transform abstract concepts into immersive
-          digital experiences.
+          {description}
         </Body>
         <div className={cx("actions")}>
-          <ButtonLink href="#gallery" variant="primary">
-            Explore Gallery
+          <ButtonLink href={primaryCta.href} variant="primary">
+            {primaryCta.label}
           </ButtonLink>
-          <ButtonLink href="#showreel" variant="ghost">
-            View Showreel
+          <ButtonLink href={secondaryCta.href} variant="ghost">
+            {secondaryCta.label}
           </ButtonLink>
         </div>
       </Container>
       <div className={cx("pills")} aria-hidden>
         <Pill>
           <span className={cx("dot")} />
-          EARTH_ENGINE SYSTEM STATUS
+          {leftPillText}
         </Pill>
         <Pill>
           <svg
@@ -73,7 +91,7 @@ export function Hero() {
             <path d="M7 11V8a5 5 0 0 1 10 0v3" />
             <rect x="5" y="11" width="14" height="10" rx="2" />
           </svg>
-          SYS SEC PARTIAL_TAP
+          {rightPillText}
         </Pill>
       </div>
     </Section>
