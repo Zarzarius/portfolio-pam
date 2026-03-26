@@ -13,20 +13,20 @@ const modes = [
   {
     id: "wireframe" as const,
     label: "WIREFRAME",
-    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
-    alt: "Abstract wireframe and digital grid visualization",
+    src: "/wireframe.png",
+    alt: "Wireframe view of a sci-fi environment interior",
   },
   {
     id: "lighting" as const,
     label: "LIGHTING",
-    src: "https://images.unsplash.com/photo-1618005188914-5d72679e9e8c?auto=format&fit=crop&w=1200&q=80",
-    alt: "3D sculpt with dramatic lighting study",
+    src: "/lighting.png",
+    alt: "Lighting pass of the sci-fi environment in engine",
   },
   {
     id: "final" as const,
     label: "FINAL",
-    src: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80",
-    alt: "Finished 3D character render",
+    src: "/final.png",
+    alt: "Final rendered sci-fi environment scene",
   },
 ];
 
