@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.gapNone {
+  gap: 0;
+}
+
+.gapXs {
+  gap: 0.5rem;
+}
+
+.gapSm {
+  gap: 0.75rem;
+}
+
+.gapMd {
+  gap: 1rem;
+}
+
+.gapLg {
+  gap: 1.25rem;
+}
+
+.gapXl {
+  gap: clamp(1rem, 2vw, 1.35rem);
+}
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignStretch {
+  align-items: stretch;
+}

@@ -1,0 +1,23 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.52rem;
+}
+
+.md {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.58rem;
+}

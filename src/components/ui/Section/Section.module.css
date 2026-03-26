@@ -1,0 +1,26 @@
+.root {
+  width: 100%;
+}
+
+.spacingDefault {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.spacingCompact {
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.spacingHero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  padding: calc(var(--header-height) + clamp(1rem, 3vw, 2.5rem))
+    clamp(1.25rem, 4vw, 3rem) clamp(4rem, 10vw, 7rem);
+  overflow: hidden;
+}
+
+.borderTop {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}

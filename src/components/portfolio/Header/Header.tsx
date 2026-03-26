@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { ButtonLink, LogoMark, NavLink } from "@/components/ui";
 import { usePathname } from "next/navigation";
+
 import styles from "./Header.module.css";
 
 const navItems = [
@@ -15,29 +16,29 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <Link className={styles.logo} href="/">
-        PAM.
-      </Link>
+      <LogoMark className={styles.logoSlot} />
       <nav className={styles.nav} aria-label="Primary">
         {navItems.map(({ href, label }) => {
           const active = href === "/contact" && pathname === "/contact";
           return (
-            <Link
+            <NavLink
               key={href}
               href={href}
-              className={
-                active ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink
-              }
+              active={active}
               aria-current={active ? "page" : undefined}
             >
               {label.toUpperCase()}
-            </Link>
+            </NavLink>
           );
         })}
       </nav>
-      <Link className={styles.hire} href="/contact#collaborate">
+      <ButtonLink
+        className={styles.hireSlot}
+        href="/contact#collaborate"
+        variant="subtle"
+      >
         HIRE ME
-      </Link>
+      </ButtonLink>
     </header>
   );
 }

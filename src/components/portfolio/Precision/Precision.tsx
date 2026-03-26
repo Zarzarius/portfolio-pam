@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+
+import { Body, Container, Heading, Section, Stat } from "@/components/ui";
+
 import styles from "./Precision.module.css";
 
 const modes = [
@@ -37,39 +40,44 @@ export function Precision() {
   const active = modes.find((m) => m.id === mode) ?? modes[0];
 
   return (
-    <section className={styles.section} id="about" aria-labelledby="precision-heading">
-      <div className={styles.grid}>
-        <div className={styles.visual}>
-          <Image
-            key={active.id}
-            className={styles.visualImage}
-            src={active.src}
-            alt={active.alt}
-            fill
-            sizes="(max-width: 840px) 100vw, 50vw"
-            priority
-          />
-        </div>
-        <div className={styles.copy}>
-          <h2 className={styles.heading} id="precision-heading">
-            PAM&apos;S PRECISION
-          </h2>
-          <p className={styles.body}>
-            My work is built on a foundation of technical excellence. I bridge
-            the gap between creative vision and real-time performance — clean
-            topology, production-ready UVs, and materials that hold up under
-            scrutiny in engine and on the big screen.
-          </p>
-          <div className={styles.stats}>
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div className={styles.statValue}>{s.value}</div>
-                <div className={styles.statLabel}>{s.label}</div>
-              </div>
-            ))}
+    <Section
+      borderTop
+      spacing="default"
+      className={styles.section}
+      id="about"
+      aria-labelledby="precision-heading"
+    >
+      <Container size="wide" padding="none">
+        <div className={styles.grid}>
+          <div className={styles.visual}>
+            <Image
+              key={active.id}
+              className={styles.visualImage}
+              src={active.src}
+              alt={active.alt}
+              fill
+              sizes="(max-width: 840px) 100vw, 50vw"
+              priority
+            />
+          </div>
+          <div className={styles.copy}>
+            <Heading as="h2" size="sectionLg" id="precision-heading">
+              PAM&apos;S PRECISION
+            </Heading>
+            <Body tone="muted" maxWidth="md" size="default">
+              My work is built on a foundation of technical excellence. I bridge
+              the gap between creative vision and real-time performance — clean
+              topology, production-ready UVs, and materials that hold up under
+              scrutiny in engine and on the big screen.
+            </Body>
+            <div className={styles.stats}>
+              {stats.map((s) => (
+                <Stat key={s.label} value={s.value} label={s.label} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
       <div className={styles.toggleRow} role="group" aria-label="Viewport mode">
         {modes.map((m) => (
           <button
@@ -87,6 +95,6 @@ export function Precision() {
           </button>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

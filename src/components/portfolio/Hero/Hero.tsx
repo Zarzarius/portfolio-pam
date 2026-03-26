@@ -1,34 +1,65 @@
+import {
+  Body,
+  ButtonLink,
+  Container,
+  GradientText,
+  Heading,
+  Kicker,
+  Pill,
+  Section,
+} from "@/components/ui";
+
 import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
-    <section className={styles.hero} id="top" aria-labelledby="hero-title">
+    <Section
+      spacing="hero"
+      className={styles.hero}
+      id="top"
+      aria-labelledby="hero-title"
+    >
       <div className={styles.glow} aria-hidden />
-      <div className={styles.inner}>
-        <p className={styles.kicker}>PAM&apos;S DIGITAL PORTFOLIO</p>
-        <h1 className={styles.title} id="hero-title">
-          PAM CREATES <span className={styles.accent}>VIRTUAL</span>
-        </h1>
-        <p className={styles.desc}>
+      <Container size="content" padding="none" className={styles.inner}>
+        <Kicker animate className={styles.heroKicker}>
+          PAM&apos;S DIGITAL PORTFOLIO
+        </Kicker>
+        <Heading
+          as="h1"
+          size="display"
+          align="center"
+          animate
+          id="hero-title"
+        >
+          PAM CREATES <GradientText>VIRTUAL</GradientText>
+        </Heading>
+        <Body
+          tone="muted"
+          align="center"
+          maxWidth="md"
+          center
+          animate
+          className={styles.heroDesc}
+        >
           I&apos;m Pam, a 3D Artist specializing in character design and
           environment modeling. I transform abstract concepts into immersive
           digital experiences.
-        </p>
+        </Body>
         <div className={styles.actions}>
-          <a className={styles.btnPrimary} href="#gallery">
+          <ButtonLink href="#gallery" variant="primary">
             Explore Gallery
-          </a>
-          <a className={styles.btnGhost} href="#showreel">
+          </ButtonLink>
+          <ButtonLink href="#showreel" variant="ghost">
             View Showreel
-          </a>
+          </ButtonLink>
         </div>
-      </div>
+      </Container>
       <div className={styles.pills} aria-hidden>
-        <span className={styles.pill}>
+        <Pill>
           <span className={styles.dot} />
           EARTH_ENGINE SYSTEM STATUS
-        </span>
-        <span className={styles.pill}>
+        </Pill>
+        <Pill>
           <svg
             className={styles.lockIcon}
             viewBox="0 0 24 24"
@@ -41,8 +72,8 @@ export function Hero() {
             <rect x="5" y="11" width="14" height="10" rx="2" />
           </svg>
           SYS SEC PARTIAL_TAP
-        </span>
+        </Pill>
       </div>
-    </section>
+    </Section>
   );
 }

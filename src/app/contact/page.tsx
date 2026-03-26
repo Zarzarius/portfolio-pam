@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { Stack } from "@/components/ui";
 import { ContactPage } from "@/components/portfolio/ContactPage";
 
 export const metadata: Metadata = {
@@ -8,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function Contact() {
-  return <ContactPage />;
+  return (
+    <Stack gap="none" align="stretch">
+      <ContactPage />
+    </Stack>
+  );
 }

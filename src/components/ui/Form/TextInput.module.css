@@ -1,0 +1,21 @@
+.input {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-bottom-color: rgba(200, 107, 255, 0.65);
+}
+
+.inputError {
+  border-bottom-color: rgba(255, 120, 120, 0.65);
+}

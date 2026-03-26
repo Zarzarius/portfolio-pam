@@ -1,0 +1,69 @@
+.root {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.default {
+  font-size: 1rem;
+}
+
+.small {
+  font-size: 0.95rem;
+}
+
+.smaller {
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.bright {
+  color: rgba(245, 245, 245, 0.88);
+}
+
+.inherit {
+  color: inherit;
+}
+
+.maxSm {
+  max-width: 28rem;
+}
+
+.maxMd {
+  max-width: 36rem;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.fadeUp {
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

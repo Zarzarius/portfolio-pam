@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { ExternalLink, LogoMark, StatusDot } from "@/components/ui";
+
 import styles from "./Footer.module.css";
 
 const social = [
@@ -17,9 +18,7 @@ export function Footer({ variant = "default" }: FooterProps) {
       <footer className={`${styles.footer} ${styles.footerContact}`}>
         <div className={styles.contactGrid}>
           <div className={styles.brandBlock}>
-            <Link className={styles.logo} href="/">
-              PAM.
-            </Link>
+            <LogoMark href="/" size="sm" />
             <p className={styles.copyInline}>
               © 2024 THE IMMERSIVE GALLERY. ALL RIGHTS RESERVED.
             </p>
@@ -27,19 +26,18 @@ export function Footer({ variant = "default" }: FooterProps) {
           <ul className={styles.socialRow} aria-label="Social links">
             {social.map((s) => (
               <li key={s.href}>
-                <a
-                  className={styles.socialLinkRow}
+                <ExternalLink
                   href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  tone="muted"
+                  className={styles.socialLinkRow}
                 >
                   {s.label.toUpperCase()}
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>
           <div className={styles.status}>
-            <span className={styles.statusDot} aria-hidden />
+            <StatusDot />
             <span className={styles.statusText}>STATUS: ONLINE</span>
           </div>
         </div>
@@ -51,9 +49,7 @@ export function Footer({ variant = "default" }: FooterProps) {
     <footer className={styles.footer} id="contact">
       <div className={styles.grid}>
         <div>
-          <a className={styles.logo} href="#top">
-            PAM.
-          </a>
+          <LogoMark href="/#top" size="sm" />
         </div>
         <div>
           <p className={styles.colTitle}>CONTACT</p>
@@ -66,14 +62,13 @@ export function Footer({ variant = "default" }: FooterProps) {
           <ul className={styles.socialList}>
             {social.map((s) => (
               <li key={s.href}>
-                <a
-                  className={styles.socialLink}
+                <ExternalLink
                   href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  tone="muted"
+                  className={styles.socialLink}
                 >
                   {s.label.toUpperCase()}
-                </a>
+                </ExternalLink>
               </li>
             ))}
           </ul>

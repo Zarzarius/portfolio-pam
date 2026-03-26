@@ -1,13 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { type FormEvent } from "react";
+import { type SubmitEventHandler } from "react";
+
+import {
+  Body,
+  Button,
+  Card,
+  Container,
+  Field,
+  Heading,
+  Kicker,
+  Stack,
+  Tag,
+  TextArea,
+  TextInput,
+} from "@/components/ui";
+
 import styles from "./ContactPage.module.css";
 
 const tags = ["UNREAL ENGINE 5", "ZBRUSH", "HOUDINI"] as const;
 
 export function ContactPage() {
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
@@ -23,11 +38,11 @@ export function ContactPage() {
       ),
     );
     window.location.href = `mailto:pam@art.net?subject=${subject}&body=${body}`;
-  }
+  };
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.grid}>
+      <Container size="wide" padding="none" className={styles.grid}>
         <div className={styles.visual}>
           <div className={styles.portraitFrame}>
             <Image
@@ -44,67 +59,67 @@ export function ContactPage() {
           </span>
         </div>
 
-        <div className={styles.copy}>
-          <div className={styles.kickerRow}>
-            <span className={styles.kickerLine} aria-hidden />
-            <p className={styles.kicker}>PAM: DIGITAL ARCHITECT</p>
-          </div>
-          <h1 className={styles.headline}>Sculpting the Ethereal.</h1>
-          <p className={styles.body}>
+        <Stack gap="xl" className={styles.copy}>
+          <Kicker withRule>PAM: DIGITAL ARCHITECT</Kicker>
+          <Heading as="h1" size="page">
+            Sculpting the Ethereal.
+          </Heading>
+          <Body tone="bright" size="default" maxWidth="md">
             I craft immersive environments and characters at the intersection of
             art direction and real-time performance — from high-fidelity sculpts to
             production-ready assets for games and cinematic pipelines.
-          </p>
+          </Body>
           <ul className={styles.tags} aria-label="Tools and platforms">
             {tags.map((t) => (
-              <li key={t} className={styles.tag}>
-                {t}
+              <li key={t}>
+                <Tag>{t}</Tag>
               </li>
             ))}
           </ul>
 
-          <div className={styles.card} id="collaborate">
-            <h2 className={styles.cardTitle}>Start a Collaboration</h2>
-            <p className={styles.cardSub}>
+          <Card id="collaborate" className={styles.collabCard} elevation="flat">
+            <Heading as="h2" size="card">
+              Start a Collaboration
+            </Heading>
+            <Body size="smaller" tone="muted" className={styles.cardSub}>
               Inquiries for freelance projects or studio partnerships.
-            </p>
+            </Body>
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
-              <label className={styles.field}>
-                <span className={styles.label}>NAME</span>
-                <input
-                  className={styles.input}
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                />
-              </label>
-              <label className={styles.field}>
-                <span className={styles.label}>EMAIL</span>
-                <input
-                  className={styles.input}
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                />
-              </label>
-              <label className={styles.field}>
-                <span className={styles.label}>PROJECT DETAILS</span>
-                <textarea
-                  className={`${styles.input} ${styles.textarea}`}
-                  name="details"
-                  rows={4}
-                  required
-                />
-              </label>
-              <button className={styles.submit} type="submit">
-                TRANSMIT MESSAGE
-              </button>
+              <Stack gap="lg">
+                <Field label="NAME" htmlFor="contact-name">
+                  <TextInput
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                  />
+                </Field>
+                <Field label="EMAIL" htmlFor="contact-email">
+                  <TextInput
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                  />
+                </Field>
+                <Field label="PROJECT DETAILS" htmlFor="contact-details">
+                  <TextArea
+                    id="contact-details"
+                    name="details"
+                    rows={4}
+                    required
+                  />
+                </Field>
+                <Button variant="submit" type="submit" fullWidth>
+                  TRANSMIT MESSAGE
+                </Button>
+              </Stack>
             </form>
-          </div>
-        </div>
-      </div>
+          </Card>
+        </Stack>
+      </Container>
     </div>
   );
 }

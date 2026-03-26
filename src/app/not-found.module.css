@@ -1,0 +1,13 @@
+.wrap {
+  min-height: min(70vh, 32rem);
+  justify-content: center;
+  padding: clamp(3rem, 10vw, 5rem) 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}

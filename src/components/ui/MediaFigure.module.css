@@ -1,0 +1,36 @@
+.figure {
+  margin: 0;
+  width: 100%;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #0a0a0a;
+}
+
+.ratio16x9 {
+  aspect-ratio: 16 / 9;
+}
+
+.ratio4x3 {
+  aspect-ratio: 4 / 3;
+}
+
+.ratio1x1 {
+  aspect-ratio: 1 / 1;
+}
+
+.ratio3x4 {
+  aspect-ratio: 3 / 4;
+}
+
+.caption {
+  margin-top: 0.65rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}

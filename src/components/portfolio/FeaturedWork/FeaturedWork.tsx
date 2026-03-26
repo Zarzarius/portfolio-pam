@@ -1,19 +1,22 @@
-import Image from "next/image";
+import { Container, Section, SectionHeader } from "@/components/ui";
+
+import { ProjectCard } from "./ProjectCard";
 import styles from "./FeaturedWork.module.css";
 
 const projects = [
   {
     id: "neon",
-    area: styles.neon,
+    areaClass: styles.neon,
     title: "PROJECT: NEON VANGUARD",
     sub: "CHARACTER DESIGN",
     note: undefined as string | undefined,
     src: "https://images.unsplash.com/photo-1535378917042-52a7b0e318b2?auto=format&fit=crop&w=1400&q=80",
     alt: "Futuristic robotic character bust with neon lighting",
+    priority: true,
   },
   {
     id: "ether",
-    area: styles.ether,
+    areaClass: styles.ether,
     title: "ETHEREAL DWELLING",
     sub: undefined,
     note: undefined,
@@ -22,7 +25,7 @@ const projects = [
   },
   {
     id: "clock",
-    area: styles.clock,
+    areaClass: styles.clock,
     title: "CLOCKWORK SOUL",
     sub: "PROP DESIGN",
     note: undefined,
@@ -31,7 +34,7 @@ const projects = [
   },
   {
     id: "obsid",
-    area: styles.obsid,
+    areaClass: styles.obsid,
     title: "OBSIDIAN SANCTUM",
     sub: undefined,
     note: "Environment exploration for an unannounced cinematic project.",
@@ -42,45 +45,20 @@ const projects = [
 
 export function FeaturedWork() {
   return (
-    <section className={styles.section} id="gallery" aria-labelledby="featured-heading">
-      <div className={styles.head}>
-        <div className={styles.titleWrap}>
-          <h2 className={styles.title} id="featured-heading">
-            FEATURED WORK
-          </h2>
-          <span className={styles.underline} aria-hidden />
+    <Section id="gallery" aria-labelledby="featured-heading">
+      <Container size="wide" padding="none">
+        <SectionHeader
+          title="FEATURED WORK"
+          titleId="featured-heading"
+          description="A selection of recent projects focusing on hyper-realistic character anatomy and complex sci-fi environments."
+          align="split"
+        />
+        <div className={styles.grid}>
+          {projects.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
         </div>
-        <p className={styles.blurb}>
-          A selection of recent projects focusing on hyper-realistic character
-          anatomy and complex sci-fi environments.
-        </p>
-      </div>
-      <div className={styles.grid}>
-        {projects.map((p) => (
-          <article
-            key={p.id}
-            className={`${styles.card} ${p.area}`}
-          >
-            <Image
-              className={styles.img}
-              src={p.src}
-              alt={p.alt}
-              fill
-              sizes="(max-width: 900px) 100vw, 66vw"
-              priority={p.id === "neon"}
-            />
-            <div className={styles.overlay}>
-              <h3 className={styles.cardTitle}>{p.title}</h3>
-              {p.sub ? (
-                <p className={styles.cardSub}>{p.sub}</p>
-              ) : null}
-              {p.note ? (
-                <p className={styles.cardNote}>{p.note}</p>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
