@@ -12,6 +12,11 @@ const cx = bind.bind(styles);
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isContact = pathname === "/contact";
+  const isStudio = pathname.startsWith("/studio");
+
+  if (isStudio) {
+    return <main className={cx("main")}>{children}</main>;
+  }
 
   return (
     <Stack

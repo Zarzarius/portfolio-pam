@@ -3,10 +3,14 @@ import bind from "classnames/bind";
 
 import { ProjectCard } from "./ProjectCard";
 import { projectsData } from "../projectsData";
+import { getSanityProjects } from "@/lib/sanity/projects";
 import styles from "./FeaturedWork.module.css";
 const cx = bind.bind(styles);
 
-export function FeaturedWork() {
+export async function FeaturedWork() {
+  const sanityProjects = await getSanityProjects();
+  const displayProjects = sanityProjects.length > 0 ? sanityProjects : projectsData;
+
   return (
     <Section id="gallery" aria-labelledby="featured-heading">
       <Container size="wide" padding="none">
@@ -17,7 +21,7 @@ export function FeaturedWork() {
           align="split"
         />
         <div className={cx("grid")}>
-          {projectsData.map((p) => (
+          {displayProjects.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}
         </div>

@@ -4,18 +4,17 @@ import bind from "classnames/bind";
 
 import { Body, Container, Heading, Kicker, Section, Tag } from "@/components/ui";
 
-import { type ProjectData, getNextProject } from "../projectsData";
+import type { ProjectData } from "../projectsData";
 import styles from "./ProjectDetailsPage.module.css";
 
 const cx = bind.bind(styles);
 
 type ProjectDetailsPageProps = {
   project: ProjectData;
+  nextProject: ProjectData;
 };
 
-export function ProjectDetailsPage({ project }: ProjectDetailsPageProps) {
-  const nextProject = getNextProject(project.id);
-
+export function ProjectDetailsPage({ project, nextProject }: ProjectDetailsPageProps) {
   return (
     <div className={cx("wrap")}>
       <Section spacing="hero" className={cx("heroSection")}>
