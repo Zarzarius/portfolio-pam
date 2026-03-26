@@ -30,29 +30,148 @@
   gap: clamp(1.5rem, 4vw, 2.75rem);
 }
 
+.menuToggle {
+  display: none;
+}
+
 .hireSlot {
   justify-self: end;
+}
+
+.mobileMenu {
+  display: none;
 }
 
 @media (max-width: 720px) {
   .header {
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
+    gap: 0.75rem;
   }
 
   .nav {
-    grid-column: 1 / -1;
-    order: 3;
+    display: none;
+  }
+
+  .menuToggle {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.66rem;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.55rem 0.45rem 0.7rem;
+    transition: background 220ms ease, border-color 220ms ease, transform 220ms ease;
+  }
+
+  .menuToggleOrbit {
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    padding-top: 0.5rem;
+    flex-direction: column;
+    gap: 0.28rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: radial-gradient(
+      circle at 24% 24%,
+      rgba(255, 255, 255, 0.32),
+      rgba(255, 255, 255, 0.06) 70%
+    );
+  }
+
+  .menuToggleLine {
+    width: 0.68rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.95);
+    transform-origin: center;
+    transition: transform 260ms ease, opacity 260ms ease;
+  }
+
+  .menuToggleLabel {
+    transform: translateY(0.03rem);
+  }
+
+  .menuToggleOpen {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  .menuToggleOpen .menuToggleLine:first-child {
+    transform: translateY(0.19rem) rotate(38deg);
+  }
+
+  .menuToggleOpen .menuToggleLine:last-child {
+    transform: translateY(-0.19rem) rotate(-38deg);
   }
 
   .hireSlot {
-    grid-column: 2;
-    grid-row: 1;
+    display: none;
   }
 
   .logoSlot {
     grid-column: 1;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    top: calc(100% - 0.3rem);
+    right: clamp(0.9rem, 4vw, 1.4rem);
+    width: min(20rem, calc(100vw - 1.8rem));
+    display: block;
+    pointer-events: none;
+    transform: translateY(-0.5rem);
+    opacity: 0;
+    clip-path: circle(7% at 92% 9%);
+    transition: clip-path 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 220ms ease, transform 240ms ease;
+  }
+
+  .mobileMenuOpen {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: circle(140% at 92% 9%);
+  }
+
+  .mobileNav {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1.1rem;
+    border-radius: 1.15rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: linear-gradient(
+      155deg,
+      rgba(15, 15, 15, 0.95) 0%,
+      rgba(28, 28, 28, 0.93) 45%,
+      rgba(10, 10, 10, 0.9) 100%
+    );
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobileNavLink {
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(0.4rem);
+    transition: transform 260ms ease, opacity 260ms ease;
+    transition-delay: var(--mobile-link-delay, 0ms);
+  }
+
+  .mobileMenuOpen .mobileNavLink {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileHire {
+    margin-top: 0.2rem;
+    width: 100%;
+    justify-content: center;
   }
 }
