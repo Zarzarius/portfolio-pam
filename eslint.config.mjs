@@ -5,6 +5,14 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Vendored WebGL fluid sim: @ts-nocheck + classes inside useEffect are intentional.
+  {
+    files: ["src/components/portfolio/Hero/SplashCursor.tsx"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "react-hooks/unsupported-syntax": "off",
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

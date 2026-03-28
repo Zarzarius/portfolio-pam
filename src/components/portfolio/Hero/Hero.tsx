@@ -10,6 +10,7 @@ import {
 } from "@/components/ui";
 import bind from "classnames/bind";
 
+import { HeroSplashBackground } from "./HeroSplashBackground";
 import styles from "./Hero.module.css";
 const cx = bind.bind(styles);
 
@@ -41,6 +42,7 @@ export function Hero({
       id="top"
       aria-labelledby="hero-title"
     >
+      <HeroSplashBackground />
       <div className={cx("glow")} aria-hidden />
       <Container size="content" padding="none" className={cx("inner")}>
         <Kicker animate className={cx("heroKicker")}>
