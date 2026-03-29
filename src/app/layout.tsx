@@ -6,6 +6,9 @@ import { getSiteSettingsContent } from "@/lib/sanity/content";
 import { AppShell } from "./AppShell";
 import "./globals.css";
 
+/** Fetch Sanity on every request so production matches Studio without redeploying. */
+export const dynamic = "force-dynamic";
+
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],

@@ -8,11 +8,6 @@ type ProjectPageProps = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateStaticParams() {
-  const projects = await getSanityProjects();
-  return projects.map((project) => ({ id: project.id }));
-}
-
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params;
   const projects = await getSanityProjects();
