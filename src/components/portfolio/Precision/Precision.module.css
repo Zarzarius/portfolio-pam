@@ -22,16 +22,40 @@
 
 .visualImage {
   object-fit: cover;
-  transition: opacity 0.4s ease;
+}
+
+.visualImageIncoming {
+  animation: crossfadeIn 0.42s ease forwards;
+}
+
+@keyframes crossfadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visualImageIncoming {
+    animation: none;
+  }
 }
 
 .toggleRow {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  justify-self: center;
   align-self: center;
+  grid-column: 1;
+  grid-row: 2;
   gap: 0.35rem;
-  margin-top: clamp(2rem, 5vw, 3rem);
+  margin-top: 0.9rem;
   padding: 0.4rem 0.45rem;
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.88);
@@ -71,6 +95,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  grid-column: 2;
+  grid-row: 1 / span 2;
 }
 
 .stats {
@@ -88,5 +114,11 @@
   .visual {
     max-height: none;
     aspect-ratio: 4 / 3;
+  }
+
+  .toggleRow,
+  .copy {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
