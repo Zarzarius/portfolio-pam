@@ -34,8 +34,6 @@ export default async function Home() {
         description={homePage.heroDescription}
         primaryCta={{ label: homePage.heroPrimaryCtaLabel, href: homePage.heroPrimaryCtaHref }}
         secondaryCta={{ label: homePage.heroSecondaryCtaLabel, href: homePage.heroSecondaryCtaHref }}
-        leftPillText={homePage.heroPillLeft}
-        rightPillText={homePage.heroPillRight}
       />
       <FeaturedWork
         title={homePage.featuredTitle}

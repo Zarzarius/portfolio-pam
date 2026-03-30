@@ -10,6 +10,14 @@ import bind from "classnames/bind";
 
 import styles from "./Showreel.module.css";
 const cx = bind.bind(styles);
+const SHOWREEL_FALLBACK_HREF = "/contact";
+
+function normalizeShowreelHref(href: string): string {
+  const candidate = href.trim();
+  const isInternalPath = candidate.startsWith("/") && !candidate.startsWith("//");
+
+  return isInternalPath ? candidate : SHOWREEL_FALLBACK_HREF;
+}
 
 type ShowreelProps = {
   kicker: string;
@@ -20,6 +28,8 @@ type ShowreelProps = {
 };
 
 export function Showreel({ kicker, title, body, ctaLabel, ctaHref }: ShowreelProps) {
+  const safeCtaHref = normalizeShowreelHref(ctaHref);
+
   return (
     <Section
       spacing="compact"
@@ -36,7 +46,7 @@ export function Showreel({ kicker, title, body, ctaLabel, ctaHref }: ShowreelPro
           {body}
         </Body>
         <ButtonLink
-          href={ctaHref}
+          href={safeCtaHref}
           variant="outline"
           className={cx("link")}
         >
